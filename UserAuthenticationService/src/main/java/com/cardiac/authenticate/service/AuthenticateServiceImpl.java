@@ -29,6 +29,9 @@ public class AuthenticateServiceImpl implements AuthenticateService{
 	
 	@Override
 	public User addUserDetails(User user) {
+
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+        	user.setPassword(encodedPassword); 
 		
 		User userObject = repo.save(user);
 		return userObject;
