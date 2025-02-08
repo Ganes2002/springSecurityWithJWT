@@ -25,6 +25,11 @@ public class SecurityConfig {
 	
 	@Autowired
 	JwtFilter jwtFilter;
+	
+	 @Bean
+	    public PasswordEncoder passwordEncoder1() {
+	        return new BCryptPasswordEncoder(); // Ensure BCryptPasswordEncoder is used
+	    }
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception
@@ -54,7 +59,7 @@ public class SecurityConfig {
 	{
 		DaoAuthenticationProvider daoProvider = new DaoAuthenticationProvider();
 		daoProvider.setUserDetailsService(userDetailsService());
-		daoProvider.setPasswordEncoder(passwordEncoder());
+		daoProvider.setPasswordEncoder(passwordEncoder1());
 		
 		return daoProvider;
 	}
